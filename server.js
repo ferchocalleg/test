@@ -45,6 +45,7 @@ const coupon = require('./routes/coupon')
 const basket = require('./routes/basket')
 const order = require('./routes/order')
 const verify = require('./routes/verify')
+const ftverify = require('./routes/ftverify')
 const recycles = require('./routes/recycles')
 const b2bOrder = require('./routes/b2bOrder')
 const showProductReviews = require('./routes/showProductReviews')
@@ -223,6 +224,9 @@ app.post('/api/Feedbacks', verify.captchaBypassChallenge())
 /* User registration challenge verifications before finale takes over */
 app.post('/api/Users', verify.registerAdminChallenge())
 app.post('/api/Users', verify.passwordRepeatChallenge())
+/* FTVerify */
+app.post('/api/Users', ftverify.emailValidation())
+app.post('/api/Users', ftverify.passwordValidation())
 /* Unauthorized users are not allowed to access B2B API */
 app.use('/b2b/v2', insecurity.isAuthorized())
 /* Add item to basket */
