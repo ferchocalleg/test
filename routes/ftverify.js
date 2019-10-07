@@ -15,3 +15,8 @@ function passPolicy (password){
     return passPolicyRegex.test(password)
 
 }
+
+exports.orderValidation = (orderId) => {
+    orderRegex = new RegExp(/(?:^[a-z0-9]{4})-(?:[a-z0-9]{16})$/i);
+    return orderRegex.test(orderId)
+}
