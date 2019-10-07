@@ -9,7 +9,6 @@ module.exports = function trackOrder () {
   return (req, res) => {
     req.params.id = decodeURIComponent(req.params.id)
     if (ftverify.orderValidation(req.params.id)){
-      console.log(entities.encode(req.params.id))
       if (utils.notSolved(challenges.reflectedXssChallenge) && utils.contains(req.params.id, '<iframe src="javascript:alert(`xss`)">')) {
         utils.solve(challenges.reflectedXssChallenge)
       }
