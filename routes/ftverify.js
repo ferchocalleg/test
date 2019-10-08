@@ -1,3 +1,6 @@
+const Entities = require('html-entities').AllHtmlEntities;
+const entities = new Entities();
+
 exports.passwordValidation = () => (req, res, next) => {
     passPolicy(req.body.password) ? next() : 
     res.status(200).send({"msg":"El password suministrador no cumple la política sugerida"})
@@ -19,4 +22,9 @@ function passPolicy (password){
 exports.orderValidation = (orderId) => {
     orderRegex = new RegExp(/(?:^[a-z0-9]{4})-(?:[a-z0-9]{16})$/i);
     return orderRegex.test(orderId)
+}
+
+exports.feedbackValidation = () => (req, res, next) => {
+    req.body.comment = entities.encode(req.body.comment);
+    next()
 }
