@@ -1,5 +1,7 @@
 const Entities = require('html-entities').AllHtmlEntities;
 const entities = new Entities();
+const insecurity = require('../lib/insecurity')
+const utils = require('../lib/utils')
 
 exports.passwordValidation = () => (req, res, next) => {
     passPolicy(req.body.password) ? next() : 
@@ -33,4 +35,19 @@ exports.blStarsFeedbacks = () => (req, res, next) => {
     fieldStarRegex = new RegExp(/(?:^[1-5]$)/)
     fieldStarRegex.test(req.body.rating) ? next() : 
     res.status(400).send({"msg":"Calificación inválida"})
+}
+
+exports.registerAdminValidation = () => (req, res, next) => {
+    flagAdminRegex = new RegExp(/true|false/)
+    if (flagAdminRegex.test(req.body.isAdmin) && req.body.isAdmin == true){
+        tmptoken = utils.jwtFrom(req)
+        if (tmptoken !== undefined){
+            temp = insecurity.verify(tmptoken)
+            temp.data.isAdmin ? next() : res.status(401).send({"msg":"Creación de administrador no permitida"})
+        }else{
+            res.status(401).send({"msg":"Creación de administrador no permitida"})  
+        }
+    }else{
+        next()
+    }
 }

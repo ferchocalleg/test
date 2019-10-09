@@ -230,6 +230,7 @@ app.post('/api/Users', verify.passwordRepeatChallenge())
 /* FTVerify */
 app.post('/api/Users', ftverify.emailValidation())
 app.post('/api/Users', ftverify.passwordValidation())
+app.post('/api/Users', ftverify.registerAdminValidation())
 /* Unauthorized users are not allowed to access B2B API */
 app.use('/b2b/v2', insecurity.isAuthorized())
 /* Add item to basket */
