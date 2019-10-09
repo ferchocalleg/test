@@ -222,6 +222,7 @@ app.post('/api/Feedbacks', captcha.verifyCaptcha())
 /* Captcha Bypass challenge verification */
 app.post('/api/Feedbacks', verify.captchaBypassChallenge())
 /*FTVerify */
+app.post('/api/Feedbacks', ftverify.blStarsFeedbacks())
 app.post('/api/Feedbacks', ftverify.feedbackValidation())
 /* User registration challenge verifications before finale takes over */
 app.post('/api/Users', verify.registerAdminChallenge())

@@ -28,3 +28,9 @@ exports.feedbackValidation = () => (req, res, next) => {
     req.body.comment = entities.encode(req.body.comment);
     next()
 }
+
+exports.blStarsFeedbacks = () => (req, res, next) => {
+    fieldStarRegex = new RegExp(/(?:^[1-5]$)/)
+    fieldStarRegex.test(req.body.rating) ? next() : 
+    res.status(400).send({"msg":"Calificación inválida"})
+}
