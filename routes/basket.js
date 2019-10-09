@@ -5,8 +5,10 @@ const challenges = require('../data/datacache').challenges
 
 module.exports = function retrieveBasket () {
   return (req, res, next) => {
-    const id = req.params.id
-    models.Basket.findOne({ where: { id }, include: [ { model: models.Product, paranoid: false } ] })
+    //const id = req.params.id
+    //models.Basket.findOne({ where: { id }, include: [ { model: models.Product, paranoid: false } ] })
+    const userLogged = insecurity.authenticatedUsers.from(req)
+    models.Basket.findOne({ where: { id: userLogged.bid }, include: [ { model: models.Product, paranoid: false } ] })
       .then(basket => {
         /* jshint eqeqeq:false */
         if (utils.notSolved(challenges.basketAccessChallenge)) {
