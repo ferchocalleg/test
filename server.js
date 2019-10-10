@@ -46,6 +46,7 @@ const basket = require('./routes/basket')
 const order = require('./routes/order')
 const verify = require('./routes/verify')
 const ftverify = require('./routes/ftverify')
+const ftRegisterAdminValidation = require ('./routes/FTregisterAdminValidation')
 const recycles = require('./routes/recycles')
 const b2bOrder = require('./routes/b2bOrder')
 const showProductReviews = require('./routes/showProductReviews')
@@ -230,7 +231,8 @@ app.post('/api/Users', verify.passwordRepeatChallenge())
 /* FTVerify */
 app.post('/api/Users', ftverify.emailValidation())
 app.post('/api/Users', ftverify.passwordValidation())
-app.post('/api/Users', ftverify.registerAdminValidation())
+//app.post('/api/Users', ftverify.registerAdminValidation())
+app.post('/api/Users', ftRegisterAdminValidation())
 /* Unauthorized users are not allowed to access B2B API */
 app.use('/b2b/v2', insecurity.isAuthorized())
 /* Add item to basket */
