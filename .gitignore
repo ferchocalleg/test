@@ -1,9 +1,9 @@
 # App
-node_modules/
+juiceshop.sqlite
 !node_modules/jsonwebtoken/node_modules/jwa/index.js
 !node_modules/express-jwt/lib/index.js
 !node_modules/jwa/index.js
-juiceshop.sqlite
+node_modules/
 order_*.pdf
 app/
 !frontend/src/app
