@@ -22,7 +22,8 @@ module.exports = function login () {
   return (req, res, next) => {
     verifyPreLoginChallenges(req)
     //models.sequelize.query('SELECT * FROM Users WHERE email = \'' + (req.body.email || '') + '\' AND password = \'' + insecurity.hash(req.body.password || '') + '\' AND deletedAt IS NULL', { model: models.User, plain: true })
-    models.sequelize.query('SELECT * FROM Users wHERE email = :email AND password = :password AND deletedAt IS NULL', { replacements: { email: req.body.email, password: insecurity.hash(req.body.password)}, model: models.User, plain: true })
+    //models.sequelize.query('SELECT * FROM Users wHERE email = :email AND password = :password AND deletedAt IS NULL', { replacements: { email: req.body.email, password: insecurity.hash(req.body.password)}, model: models.User, plain: true })
+    models.sequelize.query('SELECT id,username,email,isAdmin,lastLoginIp,profileImage,totpSecret,isActive,createdAt,updatedAt,deletedAt FROM Users wHERE email = :email AND password = :password AND deletedAt IS NULL', { replacements: { email: req.body.email, password: insecurity.hash(req.body.password)}, model: models.User, plain: true })
       .then((authenticatedUser) => {
         let user = utils.queryResultToJson(authenticatedUser)
         const rememberedEmail = insecurity.userEmailFrom(req)
